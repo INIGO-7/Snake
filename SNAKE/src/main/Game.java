@@ -1,25 +1,70 @@
 package main;
 
+import java.awt.Graphics;
+import java.awt.event.WindowListener;
+import java.awt.image.BufferStrategy;
+
+import main.entities.Food;
+import main.entities.Snake;
+import main.states.GameState;
+import main.states.State;
+
 public class Game implements Runnable{
 
+	private String title;
+	private int width, height;
+	
 	private Boolean running = false;
 	private Thread t;
 	private long current, counterDiff, past;
 	private double updateDiff, rate;
-	
 	private int counter;
 	
-	public Game(){
+	private Graphics g;
+	private BufferStrategy bs;
+	
+	private Window window;
+	private Food food;
+	private Snake snake;
+	
+	public Game(String title, int width, int height){
 		
+		this.title = title;
+		this.width = width;
+		this.height = height;
+		
+		window = new Window(title, width, height);
+		food = new Food();
+		snake = new Snake();
+		
+		State.setState(new GameState(food, snake));
 		
 	}
 	
 	public void tick() {
 		
+		State.getState().tick();
+		
 	}
 	
 	public void render() {
 		
+		bs = window.getCanvas().getBufferStrategy();
+		if(bs == null) {
+			window.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		g = bs.getDrawGraphics();
+		
+		g.clearRect(0, 0, width, height);
+		
+		//here we can start drawing:
+		
+		State.getState().render(g);
+		
+		//here we end drawing
+		bs.show();
+		g.dispose();
 	}
 	
 	@Override
