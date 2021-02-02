@@ -9,6 +9,10 @@ public class Snake {
 		
 	}
 	
+	public void tick() {
+		
+	}
+	
 	public void render(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.fillRect(301, 301, 24, 24);

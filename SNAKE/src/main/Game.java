@@ -20,13 +20,12 @@ public class Game implements Runnable{
 	private long current, counterDiff, past;
 	private double updateDiff, rate;
 	private int counter;
+	private String fpsCounter = "0";
 	
 	private Graphics g;
 	private BufferStrategy bs;
 	
 	private Window window;
-	private Food food;
-	private Snake snake;
 	
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
@@ -38,8 +37,6 @@ public class Game implements Runnable{
 		this.height = height;
 		
 		window = new Window(title, width, height);
-		food = new Food();
-		snake = new Snake();
 		
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
@@ -48,7 +45,7 @@ public class Game implements Runnable{
 		window.getCanvas().addMouseListener(mouseManager);
 		window.getCanvas().addMouseMotionListener(mouseManager);
 		
-		State.setState(new GameState(food, snake));
+		State.setState(new GameState());
 		
 	}
 	
@@ -76,6 +73,7 @@ public class Game implements Runnable{
 		//here we can start drawing:
 		
 		State.getState().render(g);
+		g.drawString(fpsCounter, 782, 15);
 		
 		//here we end drawing
 		bs.show();
@@ -102,7 +100,7 @@ public class Game implements Runnable{
 			}
 			
 			if(counterDiff >= 1000000000) {
-				System.out.println(counter);
+				setFpsCounter(counter);
 				counter = 0;
 				counterDiff = 0;
 			}
@@ -113,6 +111,10 @@ public class Game implements Runnable{
 		
 		stop();
 		
+	}
+	
+	public void setFpsCounter(int counter) {
+		this.fpsCounter = String.valueOf(counter);
 	}
 	
 	public synchronized void start() {

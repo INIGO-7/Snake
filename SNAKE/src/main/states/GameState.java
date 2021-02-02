@@ -11,16 +11,17 @@ public class GameState extends State{
 	private Food food;
 	private Snake snake;
 	
-	public GameState(Food food, Snake snake) {
+	public GameState() {
 		
-		this.food = food;
-		this.snake = snake;
+		food = new Food();
+		snake = new Snake();
 		
 	}
 	
 	@Override
 	public void tick() {
-		
+		food.tick();
+		snake.tick();
 	}
 
 	@Override
