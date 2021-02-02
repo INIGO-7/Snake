@@ -26,6 +26,16 @@ public class GameState extends State{
 	public void tick() {
 		food.tick();
 		snake.tick();
+		
+		checkIfEaten();
+		
+	}
+	
+	public void checkIfEaten() {
+		if(snake.getSnakeHead().contains(food.getX(), food.getY())) {
+			snake.incrementSize();
+			food.generateNewPosition();
+		}
 	}
 
 	@Override

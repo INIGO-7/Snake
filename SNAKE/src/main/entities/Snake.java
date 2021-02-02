@@ -39,13 +39,17 @@ public class Snake {
 			Rectangle lastRect = snakeBody.getLast();
 			
 			if(lastDirection == "up") {
+				lastRect.x = snakeBody.getFirst().x;
 				lastRect.y = snakeBody.getFirst().y - 25;
 			}else if(lastDirection == "down") {
+				lastRect.x = snakeBody.getFirst().x;
 				lastRect.y = snakeBody.getFirst().y + 25;
 			}else if(lastDirection == "right") {
 				lastRect.x = snakeBody.getFirst().x + 25;
+				lastRect.y = snakeBody.getFirst().y;
 			}else {
 				lastRect.x = snakeBody.getFirst().x - 25;
+				lastRect.y = snakeBody.getFirst().y;
 			}
 	
 			snakeBody.removeLast();
@@ -53,6 +57,13 @@ public class Snake {
 			
 			diff = 0;
 		}
+		
+//		for(Rectangle rect : snakeBody) {
+//			if(snakeBody.getFirst().equals(rect)) continue; 
+//			else if(snakeBody.getFirst().intersects(rect)) {
+//				snakeBody.clear();
+//			}
+//		}
 		
 		last = current;
 		
@@ -64,6 +75,14 @@ public class Snake {
 		for(Rectangle rect : snakeBody) {
 			g.fillRect(rect.x, rect.y, rect.width, rect.height);
 		}
+	}
+	
+	public void incrementSize() {
+		
+	}
+	
+	public Rectangle getSnakeHead() {
+		return snakeBody.getFirst();
 	}
 	
 	public void updateKeys() {

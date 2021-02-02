@@ -10,10 +10,10 @@ public class Food {
 	private Random xVal = new Random(), yVal = new Random();
 	
 	public Food() {
-		foodPositionGenerator();
+		generateNewPosition();
 	}
 	
-	public void foodPositionGenerator() {
+	public void generateNewPosition() {
 		nextX = xVal.nextInt(776) + 1;
 		nextY = yVal.nextInt(576) + 1;
 		
@@ -35,6 +35,14 @@ public class Food {
 	public void render(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(x, y, width, height);
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
 	}
 	
 }
