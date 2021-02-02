@@ -17,8 +17,8 @@ public class Food {
 		nextX = xVal.nextInt(776) + 1;
 		nextY = yVal.nextInt(576) + 1;
 		
-		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX++;
-		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY++;
+		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
+		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;
 		
 		//////////////////////////////////////////////////////////////////////////
 		///////	check that the food doesn't appear in the middle of snake: ///////
@@ -26,6 +26,7 @@ public class Food {
 		
 		x = nextX;
 		y = nextY;
+	
 	}
 	
 	public void tick() {

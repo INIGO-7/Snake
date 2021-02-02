@@ -11,7 +11,7 @@ public class Snake {
 
 	private LinkedList<Rectangle> snakeBody;
 	private long current, last;
-	private double diff, rate = 0.2;
+	private double diff, rate = 0.1;
 	private String lastDirection = "up";
 	private KeyManager keyManager;
 	
@@ -61,11 +61,12 @@ public class Snake {
 //		for(Rectangle rect : snakeBody) {
 //			if(snakeBody.getFirst().equals(rect)) continue; 
 //			else if(snakeBody.getFirst().intersects(rect)) {
+//				System.out.println("hola");
 //				snakeBody.clear();
 //			}
 //		}
 		
-		last = current;
+		last = current;			
 		
 	}
 	
@@ -79,6 +80,8 @@ public class Snake {
 	
 	public void incrementSize() {
 		
+		Rectangle toAdd = new Rectangle(snakeBody.getLast().x, snakeBody.getLast().y, 24, 24);
+		snakeBody.add(toAdd);
 	}
 	
 	public Rectangle getSnakeHead() {
