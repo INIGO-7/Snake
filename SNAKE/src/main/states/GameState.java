@@ -5,16 +5,20 @@ import java.awt.Graphics;
 
 import main.entities.Food;
 import main.entities.Snake;
+import main.input.KeyManager;
 
 public class GameState extends State{
 	
 	private Food food;
 	private Snake snake;
+	private KeyManager keyManager;
 	
-	public GameState() {
+	public GameState(KeyManager keyManager) {
+		
+		this.keyManager = keyManager;
 		
 		food = new Food();
-		snake = new Snake();
+		snake = new Snake(keyManager);
 		
 	}
 	

@@ -45,7 +45,7 @@ public class Game implements Runnable{
 		window.getCanvas().addMouseListener(mouseManager);
 		window.getCanvas().addMouseMotionListener(mouseManager);
 		
-		State.setState(new GameState());
+		State.setState(new GameState(keyManager));
 		
 	}
 	
@@ -53,9 +53,6 @@ public class Game implements Runnable{
 		
 		keyManager.tick();
 		State.getState().tick();
-		
-		if(keyManager.getDown()) System.out.println("down");
-		if(mouseManager.getLeftClick()) System.out.println("leftClick");
 		
 	}
 	
@@ -115,6 +112,10 @@ public class Game implements Runnable{
 	
 	public void setFpsCounter(int counter) {
 		this.fpsCounter = String.valueOf(counter);
+	}
+	
+	public KeyManager getKeyManager() {
+		return keyManager;
 	}
 	
 	public synchronized void start() {
