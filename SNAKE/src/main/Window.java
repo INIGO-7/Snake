@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Canvas;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.WindowEvent;
@@ -33,6 +34,10 @@ public class Window {
 	
 	public Canvas getCanvas() {
 		return canvas;
+	}
+
+	public JFrame getJFrame() {
+		return frame;
 	}
 
 	

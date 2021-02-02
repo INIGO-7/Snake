@@ -1,11 +1,12 @@
 package main;
 
 import java.awt.Graphics;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 
 import main.entities.Food;
 import main.entities.Snake;
+import main.input.KeyManager;
+import main.input.MouseManager;
 import main.states.GameState;
 import main.states.State;
 
@@ -27,6 +28,9 @@ public class Game implements Runnable{
 	private Food food;
 	private Snake snake;
 	
+	private KeyManager keyManager;
+	private MouseManager mouseManager;
+	
 	public Game(String title, int width, int height){
 		
 		this.title = title;
@@ -37,13 +41,24 @@ public class Game implements Runnable{
 		food = new Food();
 		snake = new Snake();
 		
+		keyManager = new KeyManager();
+		mouseManager = new MouseManager();
+		
+		window.getJFrame().addKeyListener(keyManager);
+		window.getCanvas().addMouseListener(mouseManager);
+		window.getCanvas().addMouseMotionListener(mouseManager);
+		
 		State.setState(new GameState(food, snake));
 		
 	}
 	
 	public void tick() {
 		
+		keyManager.tick();
 		State.getState().tick();
+		
+		if(keyManager.getDown()) System.out.println("down");
+		if(mouseManager.getLeftClick()) System.out.println("leftClick");
 		
 	}
 	
