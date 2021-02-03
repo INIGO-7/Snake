@@ -1,7 +1,10 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
+import java.util.LinkedList;
 
 import main.entities.Food;
 import main.entities.Snake;
@@ -30,6 +33,8 @@ public class Game implements Runnable{
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	
+	private GameState gameState;
+	
 	public Game(String title, int width, int height){
 		
 		this.title = title;
@@ -40,12 +45,13 @@ public class Game implements Runnable{
 		
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
+		gameState = new GameState(keyManager);
 		
 		window.getJFrame().addKeyListener(keyManager);
 		window.getCanvas().addMouseListener(mouseManager);
 		window.getCanvas().addMouseMotionListener(mouseManager);
 		
-		State.setState(new GameState(keyManager));
+		State.setState(gameState);
 		
 	}
 	
@@ -70,6 +76,9 @@ public class Game implements Runnable{
 		//here we can start drawing:
 		
 		State.getState().render(g);
+		
+		g.setColor(getFpsCounterColor(gameState.getSnakeBody(), 782, 15));
+		
 		g.drawString(fpsCounter, 782, 15);
 		
 		//here we end drawing
@@ -108,6 +117,12 @@ public class Game implements Runnable{
 		
 		stop();
 		
+	}
+	
+	public Color getFpsCounterColor(LinkedList<Rectangle> snakeBody, int fpsX, int fpsY) {
+		
+		for(Rectangle rect : snakeBody) if(rect.contains(fpsX, fpsY)) return Color.BLUE;
+		return Color.GREEN;
 	}
 	
 	public void setFpsCounter(int counter) {

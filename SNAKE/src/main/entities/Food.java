@@ -11,20 +11,8 @@ public class Food {
 	private int x, y, width = 24, height = 24, nextX, nextY;
 	private Random xVal = new Random(), yVal = new Random();
 	
-	public Food() {
-		generateNewPosition();
-	}
-	
-	public void generateNewPosition() {
-		nextX = xVal.nextInt(776) + 1;
-		nextY = yVal.nextInt(576) + 1;
-		
-		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
-		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;
-		
-		x = nextX;
-		y = nextY;
-	
+	public Food(LinkedList<Rectangle> snakeBody) {
+		generateNewPosition(snakeBody);			
 	}
 	
 	public void generateNewPosition(LinkedList<Rectangle> snakeBody) {

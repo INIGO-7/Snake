@@ -2,6 +2,8 @@ package main.states;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.LinkedList;
 
 import main.entities.Food;
 import main.entities.Snake;
@@ -17,8 +19,8 @@ public class GameState extends State{
 		
 		this.keyManager = keyManager;
 		
-		food = new Food();
 		snake = new Snake(keyManager);
+		food = new Food(snake.getSnakeBody());
 		
 	}
 	
@@ -36,6 +38,10 @@ public class GameState extends State{
 			snake.incrementSize();
 			food.generateNewPosition(snake.getSnakeBody());
 		}
+	}
+	
+	public LinkedList<Rectangle> getSnakeBody() {
+		return snake.getSnakeBody();
 	}
 
 	@Override
