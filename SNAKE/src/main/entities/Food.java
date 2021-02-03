@@ -2,6 +2,8 @@ package main.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Food {
@@ -20,12 +22,23 @@ public class Food {
 		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
 		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;
 		
-		//////////////////////////////////////////////////////////////////////////
-		///////	check that the food doesn't appear in the middle of snake: ///////
-		//////////////////////////////////////////////////////////////////////////
+		x = nextX;
+		y = nextY;
+	
+	}
+	
+	public void generateNewPosition(LinkedList<Rectangle> snakeBody) {
+		
+		nextX = xVal.nextInt(776) + 1;
+		nextY = yVal.nextInt(576) + 1;
+		
+		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
+		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;
 		
 		x = nextX;
 		y = nextY;
+		
+		for(Rectangle rect : snakeBody) if(rect.contains(x, y))  generateNewPosition(snakeBody);
 	
 	}
 	

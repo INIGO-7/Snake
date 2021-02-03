@@ -20,9 +20,15 @@ public class Snake {
 		this.keyManager = keyManager;
 		
 		snakeBody = new LinkedList<Rectangle>();
-		snakeBody.add(new Rectangle(301, 301, 24, 24));
-		snakeBody.add(new Rectangle(301, 326, 24, 24));
-		snakeBody.add(new Rectangle(301, 351, 24, 24));
+		
+		int xs = 1, ys = 301;
+		
+		for(int i = 0; i < 500; i++) {
+			
+			snakeBody.add(new Rectangle(301, ys, 24, 24));
+			
+			ys += 25;
+		}
 		
 		last = System.nanoTime();
 	}
@@ -86,6 +92,10 @@ public class Snake {
 	
 	public Rectangle getSnakeHead() {
 		return snakeBody.getFirst();
+	}
+	
+	public LinkedList<Rectangle> getSnakeBody() {
+		return snakeBody;
 	}
 	
 	public void updateKeys() {

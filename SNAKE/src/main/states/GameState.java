@@ -34,7 +34,7 @@ public class GameState extends State{
 	public void checkIfEaten() {
 		if(snake.getSnakeHead().contains(food.getX(), food.getY())) {
 			snake.incrementSize();
-			food.generateNewPosition();
+			food.generateNewPosition(snake.getSnakeBody());
 		}
 	}
 
@@ -111,6 +111,15 @@ public class GameState extends State{
 		g.drawLine(0, 525, 800, 525);
 		g.drawLine(0, 550, 800, 550);
 		g.drawLine(0, 575, 800, 575);
+		
+		//boundaries
+		
+		g.setColor(Color.GREEN);
+		g.drawLine(0, 0, 800, 0);
+		g.drawLine(0, 599, 800, 599);
+		g.drawLine(0, 0, 0, 600);
+		g.drawLine(799, 0, 799, 600);
+		g.drawLine(0, 0, 800, 0);
 		
 		////////////////////////////////////////
 		
