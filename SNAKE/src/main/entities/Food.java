@@ -35,11 +35,19 @@ public class Food {
 		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
 		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;
 		
-		x = nextX;
-		y = nextY;
-		
-		for(Rectangle rect : snakeBody) if(rect.contains(x, y))  generateNewPosition(snakeBody);
+		checkSnakePath(snakeBody, 0);
 	
+	}
+	
+	public void checkSnakePath(LinkedList<Rectangle> snakeBody, int i) {
+		
+		if(i < snakeBody.size()) {
+			if(snakeBody.get(i).contains(nextX, nextY)) generateNewPosition(snakeBody);
+			else checkSnakePath(snakeBody, ++i);
+		}else {
+			x = nextX;
+			y = nextY;
+		}
 	}
 	
 	public void tick() {

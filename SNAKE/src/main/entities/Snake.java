@@ -23,7 +23,7 @@ public class Snake {
 		
 		int xs = 1, ys = 301;
 		
-		for(int i = 0; i < 500; i++) {
+		for(int i = 0; i < 8; i++) {
 			
 			snakeBody.add(new Rectangle(301, ys, 24, 24));
 			
