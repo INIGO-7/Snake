@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import java.util.List;
 
 import main.input.KeyManager;
 
@@ -12,8 +13,9 @@ public class Snake {
 	private LinkedList<Rectangle> snakeBody;
 	private long current, last;
 	private double diff, rate = 0.1;
-	private String lastDirection = "up";
+	private String lastDirection = "up";	//the snake game will begin with the snake going upwards.
 	private KeyManager keyManager;
+	private Thread t;
 	
 	public Snake(KeyManager keyManager) {
 		
@@ -23,7 +25,7 @@ public class Snake {
 		
 		int xs = 1, ys = 301;
 		
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < 25; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
 			
 			snakeBody.add(new Rectangle(301, ys, 24, 24));
 			
@@ -31,11 +33,14 @@ public class Snake {
 		}
 		
 		last = System.nanoTime();
+		
 	}
 	
 	public void tick() {
 		
 		updateKeys();
+		
+		checkSnakeCollisions();
 		
 		current = System.nanoTime();
 		diff += current - last;
@@ -64,24 +69,19 @@ public class Snake {
 			diff = 0;
 		}
 		
-//		for(Rectangle rect : snakeBody) {
-//			if(snakeBody.getFirst().equals(rect)) continue; 
-//			else if(snakeBody.getFirst().intersects(rect)) {
-//				System.out.println("hola");
-//				snakeBody.clear();
-//			}
-//		}
+		last = current;	
 		
-		last = current;			
+		Rectangle snakeHead = getSnakeHead();
+		
+		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) System.out.println("aa");
 		
 	}
 	
 	public void render(Graphics g) {
 		
 		g.setColor(Color.GREEN);
-		for(Rectangle rect : snakeBody) {
-			g.fillRect(rect.x, rect.y, rect.width, rect.height);
-		}
+		for(Rectangle rect : snakeBody) g.fillRect(rect.x, rect.y, rect.width, rect.height);
+		
 	}
 	
 	public void incrementSize() {
@@ -96,6 +96,22 @@ public class Snake {
 	
 	public LinkedList<Rectangle> getSnakeBody() {
 		return snakeBody;
+	}
+	
+	public void checkSnakeCollisions() {
+		    	
+    	Rectangle head = getSnakeHead();
+    	
+    	//List<Rectangle> snakeBodyCopy = List.copyOf(snakeBody);
+    	
+    	
+    	
+    	snakeBody.remove(head);		//snake's head is temporarily removed, thus remaining the body of the snake. Now we can check if the head is colliding with the body.
+    	
+    	for(Rectangle rect : snakeBody) if(head.equals(rect)) snakeBody.clear();	//loops through the snake's body and clears it if the head collides with it.
+    	
+    	snakeBody.addFirst(head);
+		
 	}
 	
 	public void updateKeys() {
