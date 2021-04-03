@@ -45,7 +45,7 @@ public class Game implements Runnable{
 		
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
-		gameState = new GameState(keyManager);
+		gameState = new GameState(keyManager, mouseManager);
 		
 		window.getJFrame().addKeyListener(keyManager);
 		window.getCanvas().addMouseListener(mouseManager);

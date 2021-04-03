@@ -8,18 +8,21 @@ import java.util.LinkedList;
 import main.entities.Food;
 import main.entities.Snake;
 import main.input.KeyManager;
+import main.input.MouseManager;
 
 public class GameState extends State{
 	
 	private Food food;
 	private Snake snake;
 	private KeyManager keyManager;
+	private MouseManager mouseManager;
 	
-	public GameState(KeyManager keyManager) {
+	public GameState(KeyManager keyManager, MouseManager mouseManager) {
 		
 		this.keyManager = keyManager;
+		this.mouseManager = mouseManager;
 		
-		snake = new Snake(keyManager);
+		snake = new Snake(keyManager, mouseManager);
 		food = new Food(snake.getSnakeBody());
 		
 	}

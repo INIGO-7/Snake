@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.input.KeyManager;
+import main.input.MouseManager;
 import main.states.GameOverState;
 import main.states.State;
 
@@ -17,11 +18,12 @@ public class Snake {
 	private double diff, rate = 0.1;
 	private String lastDirection = "up";	//the snake game will begin with the snake going upwards.
 	private KeyManager keyManager;
-	private Thread t;
+	private MouseManager mouseManager;
 	
-	public Snake(KeyManager keyManager) {
+	public Snake(KeyManager keyManager, MouseManager mouseManager) {
 		
 		this.keyManager = keyManager;
+		this.mouseManager = mouseManager;
 		
 		snakeBody = new LinkedList<Rectangle>();
 		
@@ -75,7 +77,7 @@ public class Snake {
 		
 		Rectangle snakeHead = getSnakeHead();
 		
-		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) State.setState(new GameOverState());
+		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) State.setState(new GameOverState(keyManager, mouseManager));
 		
 	}
 	
@@ -108,7 +110,7 @@ public class Snake {
     	
     	snakeBody.remove(head);		//snake's head is temporarily removed, thus remaining the body of the snake. Now we can check if the head is colliding with the body.
     	
-    	for(Rectangle rect : snakeBody) if(head.equals(rect)) State.setState(new GameOverState());	//loops through the snake's body and ends the game if the head collides with it.
+    	for(Rectangle rect : snakeBody) if(head.equals(rect)) State.setState(new GameOverState(keyManager, mouseManager));	//loops through the snake's body and ends the game if the head collides with it.
     	
     	snakeBody.addFirst(head);
 		
