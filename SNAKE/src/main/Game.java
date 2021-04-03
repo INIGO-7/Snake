@@ -11,6 +11,7 @@ import main.entities.Snake;
 import main.input.KeyManager;
 import main.input.MouseManager;
 import main.states.GameState;
+import main.states.MenuState;
 import main.states.State;
 
 public class Game implements Runnable{
@@ -33,7 +34,7 @@ public class Game implements Runnable{
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	
-	private GameState gameState;
+	private MenuState menuState;
 	
 	public Game(String title, int width, int height){
 		
@@ -45,13 +46,13 @@ public class Game implements Runnable{
 		
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
-		gameState = new GameState(keyManager, mouseManager);
+		menuState = new MenuState(keyManager, mouseManager);
 		
 		window.getJFrame().addKeyListener(keyManager);
 		window.getCanvas().addMouseListener(mouseManager);
 		window.getCanvas().addMouseMotionListener(mouseManager);
 		
-		State.setState(gameState);
+		State.setState(menuState);
 		
 	}
 	
@@ -77,7 +78,7 @@ public class Game implements Runnable{
 		
 		State.getState().render(g);
 		
-		g.setColor(getFpsCounterColor(gameState.getSnakeBody(), 782, 15));
+		if(menuState.getGameState() != null) g.setColor(getFpsCounterColor(menuState.getGameState().getSnakeBody(), 782, 15));
 		
 		g.drawString(fpsCounter, 782, 15);
 		
