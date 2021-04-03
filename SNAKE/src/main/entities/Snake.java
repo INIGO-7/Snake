@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.input.KeyManager;
+import main.states.GameOverState;
+import main.states.State;
 
 public class Snake {
 
@@ -25,7 +27,7 @@ public class Snake {
 		
 		int xs = 1, ys = 301;
 		
-		for(int i = 0; i < 25; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
+		for(int i = 0; i < 10; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
 			
 			snakeBody.add(new Rectangle(301, ys, 24, 24));
 			
@@ -73,7 +75,7 @@ public class Snake {
 		
 		Rectangle snakeHead = getSnakeHead();
 		
-		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) System.out.println("aa");
+		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) State.setState(new GameOverState());
 		
 	}
 	
@@ -102,13 +104,11 @@ public class Snake {
 		    	
     	Rectangle head = getSnakeHead();
     	
-    	//List<Rectangle> snakeBodyCopy = List.copyOf(snakeBody);
-    	
-    	
+    	//List<Rectangle> snakeBodyCopy = List.copyOf(snakeBody);			//shallow copy, we dont want this.
     	
     	snakeBody.remove(head);		//snake's head is temporarily removed, thus remaining the body of the snake. Now we can check if the head is colliding with the body.
     	
-    	for(Rectangle rect : snakeBody) if(head.equals(rect)) snakeBody.clear();	//loops through the snake's body and clears it if the head collides with it.
+    	for(Rectangle rect : snakeBody) if(head.equals(rect)) State.setState(new GameOverState());	//loops through the snake's body and ends the game if the head collides with it.
     	
     	snakeBody.addFirst(head);
 		
