@@ -20,10 +20,32 @@ public class Snake {
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	
-	public Snake(KeyManager keyManager, MouseManager mouseManager) {
+	public Snake(KeyManager keyManager, MouseManager mouseManager) {			//constructor with default snake speed.
 		
 		this.keyManager = keyManager;
 		this.mouseManager = mouseManager;
+				
+		snakeBody = new LinkedList<Rectangle>();
+		
+		int xs = 1, ys = 301;
+		
+		for(int i = 0; i < 10; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
+			
+			snakeBody.add(new Rectangle(301, ys, 24, 24));
+			
+			ys += 25;
+		}
+		
+		last = System.nanoTime();
+		
+	}
+	
+	public Snake(KeyManager keyManager, MouseManager mouseManager, float rate) {	//constructor that can specify the snake's speed.
+		
+		this.keyManager = keyManager;
+		this.mouseManager = mouseManager;
+		
+		this.rate = rate;
 		
 		snakeBody = new LinkedList<Rectangle>();
 		
@@ -77,7 +99,7 @@ public class Snake {
 		
 		Rectangle snakeHead = getSnakeHead();
 		
-		if(snakeHead.x < 1 || snakeHead.x > 799 || snakeHead.y < 1 || snakeHead.y > 599) State.setState(new GameOverState(keyManager, mouseManager));
+		if(snakeHead.x < 1 || snakeHead.x > 599 || snakeHead.y < 1 || snakeHead.y > 399) State.setState(new GameOverState(keyManager, mouseManager));
 		
 	}
 	

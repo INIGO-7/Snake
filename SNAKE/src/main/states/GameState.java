@@ -17,12 +17,14 @@ public class GameState extends State{
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	
-	public GameState(KeyManager keyManager, MouseManager mouseManager) {
+	public GameState(KeyManager keyManager, MouseManager mouseManager, int gameMode) {
 		
 		this.keyManager = keyManager;
 		this.mouseManager = mouseManager;
 		
-		snake = new Snake(keyManager, mouseManager);
+		if(gameMode == 1) snake = new Snake(keyManager, mouseManager);
+		else snake = new Snake(keyManager, mouseManager, 0.05f);
+		
 		food = new Food(snake.getSnakeBody());
 		
 	}
