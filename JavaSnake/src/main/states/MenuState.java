@@ -12,7 +12,6 @@ public class MenuState extends State{
 	private Rectangle startGame1, startGame2;
 	private MouseManager mouseManager;
 	private KeyManager keyManager;
-	private GameState gameState;
 	
 	public MenuState(KeyManager keyManager, MouseManager mouseManager) {
 		
@@ -26,15 +25,8 @@ public class MenuState extends State{
 		startGame1 = new Rectangle(250, 175, 100, 50);
 		startGame2 = new Rectangle(250, 250, 100, 50);
 		
-		if(mouseManager.getLeftClick() && startGame1.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) {
-			this.gameState = new GameState(keyManager, mouseManager, 1);
-			State.setState(gameState);
-			
-		}else if(mouseManager.getLeftClick() && startGame2.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) {
-			this.gameState = new GameState(keyManager, mouseManager, 2);
-			State.setState(gameState);
-		}
-
+		if(mouseManager.getLeftClick() && startGame1.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) State.setState(new GameState(keyManager, mouseManager, 1));
+		else if(mouseManager.getLeftClick() && startGame2.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) State.setState(new GameState(keyManager, mouseManager, 2));
 		
 	}
 
@@ -57,10 +49,6 @@ public class MenuState extends State{
 		g.setColor(Color.WHITE);
 		g.drawString("BEGIN GAMEMODE 2", 240, 275);
 		
-	}
-	
-	public GameState getGameState() {
-		return gameState;
 	}
 
 }

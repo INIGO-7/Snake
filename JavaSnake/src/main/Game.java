@@ -78,7 +78,12 @@ public class Game implements Runnable{
 		
 		State.getState().render(g);
 		
-		if(menuState.getGameState() != null) g.setColor(getFpsCounterColor(menuState.getGameState().getSnakeBody(), 582, 15));		//this doesn't update after 1 game reset.
+		if(State.getState() instanceof GameState)  {
+			
+			GameState gs = (GameState) State.getState();
+			
+			g.setColor(getFpsCounterColor(gs.getSnakeBody(), 582, 15));	//we set the colour to blue if the snake is passing by the fps counter.
+		}
 		
 		g.drawString(fpsCounter, 582, 15);
 		
