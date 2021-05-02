@@ -20,19 +20,20 @@ public class Snake {
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
 	
-	public Snake(KeyManager keyManager, MouseManager mouseManager) {			//constructor with default snake speed.
+	public Snake(KeyManager keyManager, MouseManager mouseManager, int startLength) {			//constructor with default snake speed.
 		
 		this.keyManager = keyManager;
 		this.mouseManager = mouseManager;
 				
 		snakeBody = new LinkedList<Rectangle>();
 		
-		int xs = 1, ys = 301;
+		int xs = 1, ys = 201;
 		
-		for(int i = 0; i < 10; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
+		for(int i = 0; i < startLength; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (now depends on the startLength parameter).
+												//this is just to fill the snake body right when the play button is pressed.
 			
-			snakeBody.add(new Rectangle(301, ys, 24, 24));
-			
+			snakeBody.add(new Rectangle(301, ys, 24, 24));	//301 is the starting x of the snake. 24 24 are the width and height of the rectangles that compose the snake's body.
+															//ys is at first 301 (starting y coordinate). It will be increased to create new rectangles (fill the body) under the snake.
 			ys += 25;
 		}
 		
@@ -40,18 +41,18 @@ public class Snake {
 		
 	}
 	
-	public Snake(KeyManager keyManager, MouseManager mouseManager, float rate) {	//constructor that can specify the snake's speed.
+	public Snake(KeyManager keyManager, MouseManager mouseManager, int startLength, float rate) {	//constructor that can specify the snake's speed.
 		
 		this.keyManager = keyManager;
 		this.mouseManager = mouseManager;
 		
-		this.rate = rate;
+		this.rate = rate;								//initialise the speed rate of the snake.
 		
 		snakeBody = new LinkedList<Rectangle>();
 		
 		int xs = 1, ys = 301;
 		
-		for(int i = 0; i < 10; i++) {	//the length of the snake in the beginning is specified by the range of values that "i" accepts (here it goes from 0 to 9 = 10 is the length of snakeBody).
+		for(int i = 0; i < startLength; i++) {	
 			
 			snakeBody.add(new Rectangle(301, ys, 24, 24));
 			
@@ -71,7 +72,7 @@ public class Snake {
 		current = System.nanoTime();
 		diff += current - last;
 		
-		if(diff/1000000000 >= rate) {
+		if(diff/1000000000 >= rate) {						//sometimes, if keys that indicate contrary directions are pressed quickly the snake will collide with itself. TO FIX.
 			
 			Rectangle lastRect = snakeBody.getLast();
 			
@@ -99,7 +100,7 @@ public class Snake {
 		
 		Rectangle snakeHead = getSnakeHead();
 		
-		if(snakeHead.x < 1 || snakeHead.x > 599 || snakeHead.y < 1 || snakeHead.y > 399) State.setState(new GameOverState(keyManager, mouseManager));
+		if(snakeHead.x < 1 || snakeHead.x > 399 || snakeHead.y < 1 || snakeHead.y > 299) State.setState(new GameOverState(keyManager, mouseManager));
 		
 	}
 	
@@ -122,6 +123,10 @@ public class Snake {
 	
 	public LinkedList<Rectangle> getSnakeBody() {
 		return snakeBody;
+	}
+	
+	public int getSnakeSize() {
+		return snakeBody.size();
 	}
 	
 	public void checkSnakeCollisions() {

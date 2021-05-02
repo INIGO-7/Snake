@@ -22,8 +22,8 @@ public class MenuState extends State{
 	
 	public void tick() {
 		
-		startGame1 = new Rectangle(250, 175, 100, 50);
-		startGame2 = new Rectangle(250, 250, 100, 50);
+		startGame1 = new Rectangle(140, 100, 120, 50);
+		startGame2 = new Rectangle(140, 175, 120, 50);
 		
 		if(mouseManager.getLeftClick() && startGame1.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) State.setState(new GameState(keyManager, mouseManager, 1));
 		else if(mouseManager.getLeftClick() && startGame2.contains((int) (mouseManager.getMouseX()), (int) (mouseManager.getMouseY()))) State.setState(new GameState(keyManager, mouseManager, 2));
@@ -33,21 +33,21 @@ public class MenuState extends State{
 	public void render(Graphics g) {
 		
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 1000, 1000);
+		g.fillRect(0, 0, 400, 300);
 		
 		g.setColor(Color.RED);
-		g.fillRect(250, 175, 100, 50);
+		g.fillRect(140, 100, 120, 50);
 		
 		g.setColor(Color.RED);
-		g.fillRect(250, 250, 100, 50);
+		g.fillRect(140, 175, 120, 50);
 		
-		g.drawString("SNAKE", 275, 100);
-		
-		g.setColor(Color.WHITE);
-		g.drawString("BEGIN GAMEMODE 1", 240, 200);
+		g.drawString("SNAKE", 175, 50);
 		
 		g.setColor(Color.WHITE);
-		g.drawString("BEGIN GAMEMODE 2", 240, 275);
+		g.drawString("BEGIN GAMEMODE 1", 140, 125);
+		
+		g.setColor(Color.WHITE);
+		g.drawString("BEGIN GAMEMODE 2", 140, 200);
 		
 	}
 

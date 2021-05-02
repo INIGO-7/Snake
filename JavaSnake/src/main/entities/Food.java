@@ -17,8 +17,8 @@ public class Food {
 	
 	public void generateNewPosition(LinkedList<Rectangle> snakeBody) {
 		
-		nextX = xVal.nextInt(576) + 1;
-		nextY = yVal.nextInt(376) + 1;
+		nextX = xVal.nextInt(376) + 1;
+		nextY = yVal.nextInt(276) + 1;
 		
 		while((nextX - 1) % 50 != 0 || (nextX - 1) % 25 != 0) nextX--;
 		while((nextY - 1) % 50 != 0 || (nextY - 1) % 25 != 0) nextY--;

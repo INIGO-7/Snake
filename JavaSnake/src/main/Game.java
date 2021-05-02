@@ -82,10 +82,14 @@ public class Game implements Runnable{
 			
 			GameState gs = (GameState) State.getState();
 			
-			g.setColor(getFpsCounterColor(gs.getSnakeBody(), 582, 15));	//we set the colour to blue if the snake is passing by the fps counter.
+			g.setColor(getFpsCounterColor(gs.getSnakeBody(), 382, 15));	//we set the colour to blue if the snake is passing by the fps counter.
+			g.drawString(fpsCounter, 382, 15);
+			
+			g.setColor(Color.RED);
+			g.drawString(String.valueOf(gs.getScore()), 357, 15);
+			
 		}
 		
-		g.drawString(fpsCounter, 582, 15);
 		
 		//here we end drawing
 		bs.show();

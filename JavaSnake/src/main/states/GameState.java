@@ -22,8 +22,8 @@ public class GameState extends State{
 		this.keyManager = keyManager;
 		this.mouseManager = mouseManager;
 		
-		if(gameMode == 1) snake = new Snake(keyManager, mouseManager);
-		else snake = new Snake(keyManager, mouseManager, 0.05f);
+		if(gameMode == 1) snake = new Snake(keyManager, mouseManager, 5);
+		else snake = new Snake(keyManager, mouseManager, 5, 0.05f);
 		
 		food = new Food(snake.getSnakeBody());
 		
@@ -48,6 +48,10 @@ public class GameState extends State{
 	public LinkedList<Rectangle> getSnakeBody() {
 		return snake.getSnakeBody();
 	}
+	
+	public int getScore() {
+		return snake.getSnakeSize();
+	}
 
 	@Override
 	public void render(Graphics g) {
@@ -56,7 +60,7 @@ public class GameState extends State{
 		
 		
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 600, 400);
+		g.fillRect(0, 0, 400, 300);
 		
 		//drawing the lines:
 		
@@ -64,56 +68,44 @@ public class GameState extends State{
 		
 		// X axis
 
-		g.drawLine(25, 0, 25, 400);
-		g.drawLine(50, 0, 50, 400);
-		g.drawLine(75, 0, 75, 400);
-		g.drawLine(100, 0, 100, 400);
-		g.drawLine(125, 0, 125, 400);
-		g.drawLine(150, 0, 150, 400);
-		g.drawLine(175, 0, 175, 400);
-		g.drawLine(200, 0, 200, 400);
-		g.drawLine(225, 0, 225, 400);
-		g.drawLine(250, 0, 250, 400);
-		g.drawLine(275, 0, 275, 400);
-		g.drawLine(300, 0, 300, 400);
-		g.drawLine(325, 0, 325, 400);
-		g.drawLine(350, 0, 350, 400);
-		g.drawLine(375, 0, 375, 400);
-		g.drawLine(400, 0, 400, 400);
-		g.drawLine(425, 0, 425, 400);
-		g.drawLine(450, 0, 450, 400);
-		g.drawLine(475, 0, 475, 400);
-		g.drawLine(500, 0, 500, 400);
-		g.drawLine(525, 0, 525, 400);
-		g.drawLine(550, 0, 550, 400);
-		g.drawLine(575, 0, 575, 400);
+		g.drawLine(25, 0, 25, 300);
+		g.drawLine(50, 0, 50, 4300);
+		g.drawLine(75, 0, 75, 300);
+		g.drawLine(100, 0, 100, 300);
+		g.drawLine(125, 0, 125, 300);
+		g.drawLine(150, 0, 150, 300);
+		g.drawLine(175, 0, 175, 300);
+		g.drawLine(200, 0, 200, 300);
+		g.drawLine(225, 0, 225, 300);
+		g.drawLine(250, 0, 250, 300);
+		g.drawLine(275, 0, 275, 300);
+		g.drawLine(300, 0, 300, 300);
+		g.drawLine(325, 0, 325, 300);
+		g.drawLine(350, 0, 350, 300);
+		g.drawLine(375, 0, 375, 300);
 		
 		
 		// Y axis
 		
-		g.drawLine(0, 25, 600, 25);	
-		g.drawLine(0, 50, 600, 50);
-		g.drawLine(0, 75, 600, 75);
-		g.drawLine(0, 100, 600, 100);
-		g.drawLine(0, 125, 600, 125);
-		g.drawLine(0, 150, 600, 150);
-		g.drawLine(0, 175, 600, 175);
-		g.drawLine(0, 200, 600, 200);
-		g.drawLine(0, 225, 600, 225);
-		g.drawLine(0, 250, 600, 250);
-		g.drawLine(0, 275, 600, 275);
-		g.drawLine(0, 300, 600, 300);
-		g.drawLine(0, 325, 600, 325);
-		g.drawLine(0, 350, 600, 350);
-		g.drawLine(0, 375, 600, 375);
+		g.drawLine(0, 25, 400, 25);	
+		g.drawLine(0, 50, 400, 50);
+		g.drawLine(0, 75, 400, 75);
+		g.drawLine(0, 100, 400, 100);
+		g.drawLine(0, 125, 400, 125);
+		g.drawLine(0, 150, 400, 150);
+		g.drawLine(0, 175, 400, 175);
+		g.drawLine(0, 200, 400, 200);
+		g.drawLine(0, 225, 400, 225);
+		g.drawLine(0, 250, 400, 250);
+		g.drawLine(0, 275, 400, 275);
 		
 		//boundaries
 		
 		g.setColor(Color.GREEN);
-		g.drawLine(0, 0, 600, 0);
-		g.drawLine(0, 399, 600, 399);
-		g.drawLine(0, 0, 0, 600);
-		g.drawLine(599, 0, 599, 399);
+		g.drawLine(0, 0, 400, 0);
+		g.drawLine(0, 299, 400, 299);
+		g.drawLine(0, 0, 0, 400);
+		g.drawLine(399, 0, 399, 299);
 		
 		////////////////////////////////////////
 		
